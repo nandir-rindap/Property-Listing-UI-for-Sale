@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Home, Eye, MessageSquare, TrendingUp, MoreVertical, Edit, Trash2, Users, DollarSign, Image as ImageIcon, Star } from "lucide-react";
+import { Home, Eye, MessageSquare, TrendingUp, MoreVertical, Edit, Trash2, Users, DollarSign, Image as ImageIcon, Star, AlertCircle } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,6 +13,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 // TODO: remove mock functionality
 import bedroom1 from "@assets/stock_images/cozy_bedroom_interio_77d4ad42.jpg";
@@ -302,6 +304,75 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                   <Button data-testid="button-update-pricing">Update Pricing Structure</Button>
+                </div>
+              </Card>
+
+              <Card className="p-6">
+                <h3 className="text-lg font-semibold mb-4">Pay Later Options</h3>
+                <p className="text-sm text-muted-foreground mb-6">
+                  Set reservation fees for customers who choose to pay later
+                </p>
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-3">
+                      <Label htmlFor="pay-later-24h">24 Hours Reservation Fee</Label>
+                      <div className="flex items-center gap-3">
+                        <div className="relative flex-1">
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">₦</span>
+                          <Input
+                            id="pay-later-24h"
+                            type="number"
+                            defaultValue="1000"
+                            className="pl-8"
+                            data-testid="input-pay-later-24h"
+                          />
+                        </div>
+                        <Badge variant="outline" className="whitespace-nowrap">reservation fee</Badge>
+                      </div>
+                      <p className="text-xs text-muted-foreground">
+                        Fee charged when customer selects 24-hour payment option
+                      </p>
+                    </div>
+
+                    <div className="space-y-3">
+                      <Label htmlFor="pay-later-48h">48 Hours Reservation Fee</Label>
+                      <div className="flex items-center gap-3">
+                        <div className="relative flex-1">
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">₦</span>
+                          <Input
+                            id="pay-later-48h"
+                            type="number"
+                            defaultValue="2000"
+                            className="pl-8"
+                            data-testid="input-pay-later-48h"
+                          />
+                        </div>
+                        <Badge variant="outline" className="whitespace-nowrap">reservation fee</Badge>
+                      </div>
+                      <p className="text-xs text-muted-foreground">
+                        Fee charged when customer selects 48-hour payment option
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                    <div className="flex gap-3">
+                      <AlertCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                      <div className="space-y-1">
+                        <p className="text-sm font-medium text-blue-900 dark:text-blue-100">
+                          How Pay Later Works
+                        </p>
+                        <ul className="text-xs text-blue-800 dark:text-blue-200 space-y-1 list-disc list-inside">
+                          <li>Customer pays the reservation fee immediately</li>
+                          <li>Full payment must be completed within the selected timeframe</li>
+                          <li>Reservation fee is deducted from the total annual rent</li>
+                          <li>If payment is not completed on time, reservation fee is forfeited</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Button data-testid="button-update-pay-later">Save Pay Later Settings</Button>
                 </div>
               </Card>
             </TabsContent>

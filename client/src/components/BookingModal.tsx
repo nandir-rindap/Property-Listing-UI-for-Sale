@@ -12,8 +12,14 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Clock } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface BookingModalProps {
   open: boolean;
@@ -28,22 +34,24 @@ export default function BookingModal({ open, onOpenChange, propertyTitle, monthl
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const [selectedPayLaterOption, setSelectedPayLaterOption] = useState<'24h' | '48h' | null>(null);
   
   const yearlyTotal = monthlyPrice * 12;
 
-  const handleSubmit = (paymentType: 'now' | 'later') => {
-    console.log('Booking request:', { name, email, phone, message, paymentType });
+  const handleSubmit = (paymentType: 'now' | 'later', payLaterDuration?: '24h' | '48h') => {
+    console.log('Booking request:', { name, email, phone, message, paymentType, payLaterDuration });
     toast({
       title: paymentType === 'now' ? "Processing Payment..." : "Booking Request Sent!",
       description: paymentType === 'now' 
         ? "You will be redirected to payment shortly." 
-        : "The property owner will contact you for payment arrangement.",
+        : `Payment arrangement for ${payLaterDuration === '24h' ? '24 hours' : '48 hours'} selected. The property owner will contact you.`,
     });
     onOpenChange(false);
     setName("");
     setEmail("");
     setPhone("");
     setMessage("");
+    setSelectedPayLaterOption(null);
   };
 
   return (
@@ -157,9 +165,44 @@ export default function BookingModal({ open, onOpenChange, propertyTitle, monthl
           <Button variant="outline" onClick={() => onOpenChange(false)} data-testid="button-cancel-booking" className="w-full sm:w-auto">
             Cancel
           </Button>
-          <Button onClick={() => handleSubmit('later')} variant="secondary" data-testid="button-pay-later" className="w-full sm:w-auto">
-            Pay Later
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary" data-testid="button-pay-later" className="w-full sm:w-auto">
+                <Clock className="h-4 w-4 mr-2" />
+                Pay Later
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-64">
+              <DropdownMenuItem 
+                onClick={() => {
+                  setSelectedPayLaterOption('24h');
+                  handleSubmit('later', '24h');
+                }}
+                data-testid="button-pay-later-24h"
+                className="flex items-center justify-between py-3"
+              >
+                <div className="flex flex-col">
+                  <span className="font-medium">Pay in 24 hours</span>
+                  <span className="text-xs text-muted-foreground">Reservation fee required</span>
+                </div>
+                <span className="font-semibold text-primary">₦1,000</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem 
+                onClick={() => {
+                  setSelectedPayLaterOption('48h');
+                  handleSubmit('later', '48h');
+                }}
+                data-testid="button-pay-later-48h"
+                className="flex items-center justify-between py-3"
+              >
+                <div className="flex flex-col">
+                  <span className="font-medium">Pay in 48 hours</span>
+                  <span className="text-xs text-muted-foreground">Extended reservation</span>
+                </div>
+                <span className="font-semibold text-primary">₦2,000</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <Button onClick={() => handleSubmit('now')} data-testid="button-pay-now" className="w-full sm:w-auto">
             Pay Now
           </Button>
