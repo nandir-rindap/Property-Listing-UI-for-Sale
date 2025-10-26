@@ -12,7 +12,9 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Calendar } from "@/components/ui/calendar";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { Upload } from "lucide-react";
 
 interface BookingModalProps {
   open: boolean;
@@ -28,12 +30,27 @@ export default function BookingModal({ open, onOpenChange, propertyTitle, monthl
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const [idType, setIdType] = useState("");
+  const [idFile, setIdFile] = useState<File | null>(null);
+  
+  const yearlyTotal = monthlyPrice * 12;
 
-  const handleSubmit = () => {
-    console.log('Booking request:', { name, email, phone, message, moveInDate });
+  const handleSubmit = (paymentType: 'now' | 'later') => {
+    if (!idFile || !idType) {
+      toast({
+        title: "Missing Information",
+        description: "Please upload your identification document to proceed.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    console.log('Booking request:', { name, email, phone, message, moveInDate, idType, idFile, paymentType });
     toast({
-      title: "Booking Request Sent!",
-      description: "The property owner will contact you soon.",
+      title: paymentType === 'now' ? "Processing Payment..." : "Booking Request Sent!",
+      description: paymentType === 'now' 
+        ? "You will be redirected to payment shortly." 
+        : "The property owner will contact you for payment arrangement.",
     });
     onOpenChange(false);
     setName("");
@@ -41,15 +58,17 @@ export default function BookingModal({ open, onOpenChange, propertyTitle, monthl
     setPhone("");
     setMessage("");
     setMoveInDate(undefined);
+    setIdType("");
+    setIdFile(null);
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Request to Book</DialogTitle>
+          <DialogTitle>Annual Booking Request</DialogTitle>
           <DialogDescription>
-            {propertyTitle} - ${monthlyPrice}/month
+            {propertyTitle} - ₦{monthlyPrice.toLocaleString()}/month (₦{yearlyTotal.toLocaleString()}/year)
           </DialogDescription>
         </DialogHeader>
 
@@ -114,14 +133,76 @@ export default function BookingModal({ open, onOpenChange, propertyTitle, monthl
               data-testid="input-booking-message"
             />
           </div>
+
+          <div className="space-y-3 p-4 border rounded-lg bg-muted/50">
+            <div className="flex items-center gap-2">
+              <Upload className="h-5 w-5 text-primary" />
+              <Label className="text-base font-semibold">Identification Verification Required</Label>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Please upload a photo of one of the following identification documents to proceed with booking:
+            </p>
+            <div>
+              <Label htmlFor="id-type">ID Type</Label>
+              <Select value={idType} onValueChange={setIdType}>
+                <SelectTrigger id="id-type" data-testid="select-id-type">
+                  <SelectValue placeholder="Select ID type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="nin">NIN Slip</SelectItem>
+                  <SelectItem value="voters_card">Voter's Card</SelectItem>
+                  <SelectItem value="drivers_license">Driver's License</SelectItem>
+                  <SelectItem value="passport">International Passport</SelectItem>
+                  <SelectItem value="student_id">Student ID Card</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label htmlFor="id-upload">Upload ID Document</Label>
+              <Input
+                id="id-upload"
+                type="file"
+                accept="image/*,.pdf"
+                onChange={(e) => setIdFile(e.target.files?.[0] || null)}
+                data-testid="input-id-upload"
+                className="cursor-pointer"
+              />
+              {idFile && (
+                <p className="text-sm text-green-600 mt-1">
+                  ✓ {idFile.name} uploaded
+                </p>
+              )}
+            </div>
+          </div>
+
+          <div className="p-4 border rounded-lg bg-primary/5">
+            <p className="text-sm font-medium mb-2">Booking Summary</p>
+            <div className="space-y-1 text-sm">
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Monthly Rate:</span>
+                <span className="font-medium">₦{monthlyPrice.toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Duration:</span>
+                <span className="font-medium">1 Year (12 months)</span>
+              </div>
+              <div className="flex justify-between pt-2 border-t font-semibold">
+                <span>Annual Total:</span>
+                <span className="text-primary">₦{yearlyTotal.toLocaleString()}</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)} data-testid="button-cancel-booking">
+        <DialogFooter className="flex-col sm:flex-row gap-2">
+          <Button variant="outline" onClick={() => onOpenChange(false)} data-testid="button-cancel-booking" className="w-full sm:w-auto">
             Cancel
           </Button>
-          <Button onClick={handleSubmit} data-testid="button-submit-booking">
-            Send Request
+          <Button onClick={() => handleSubmit('later')} variant="secondary" data-testid="button-pay-later" className="w-full sm:w-auto">
+            Pay Later
+          </Button>
+          <Button onClick={() => handleSubmit('now')} data-testid="button-pay-now" className="w-full sm:w-auto">
+            Pay Now
           </Button>
         </DialogFooter>
       </DialogContent>

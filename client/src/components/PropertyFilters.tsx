@@ -78,7 +78,7 @@ export default function PropertyFilters({ onFiltersChange }: PropertyFiltersProp
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="distance">Distance from University</Label>
+        <Label htmlFor="distance">Distance from Unijos</Label>
         <Select value={distance} onValueChange={setDistance}>
           <SelectTrigger id="distance" data-testid="select-distance">
             <SelectValue />

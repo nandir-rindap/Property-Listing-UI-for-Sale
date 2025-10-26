@@ -17,8 +17,8 @@ const mockProperties: Property[] = [
   {
     id: '1',
     title: 'Modern Studio Apartment',
-    location: 'Downtown District',
-    distance: '0.3 mi from University',
+    location: 'Rayfield, Jos',
+    distance: '0.3 mi from Unijos',
     price: 850,
     roomType: 'Studio',
     bedrooms: 1,
@@ -30,8 +30,8 @@ const mockProperties: Property[] = [
   {
     id: '2',
     title: 'Spacious 1BR with Balcony',
-    location: 'Campus Village',
-    distance: '0.5 mi from University',
+    location: 'Bauchi Road, Jos',
+    distance: '0.5 mi from Unijos',
     price: 1200,
     roomType: '1 Bedroom',
     bedrooms: 1,
@@ -43,8 +43,8 @@ const mockProperties: Property[] = [
   {
     id: '3',
     title: 'Cozy Shared Room',
-    location: 'Student Quarter',
-    distance: '0.8 mi from University',
+    location: 'Angwan Rogo, Jos',
+    distance: '0.8 mi from Unijos',
     price: 550,
     roomType: 'Shared',
     bedrooms: 1,
@@ -56,8 +56,8 @@ const mockProperties: Property[] = [
   {
     id: '4',
     title: 'Luxury 2BR Apartment',
-    location: 'Hillside Commons',
-    distance: '1.2 mi from University',
+    location: 'Vom Road, Jos',
+    distance: '1.2 mi from Unijos',
     price: 1650,
     roomType: '2 Bedroom',
     bedrooms: 2,
@@ -69,8 +69,8 @@ const mockProperties: Property[] = [
   {
     id: '5',
     title: 'Affordable Studio',
-    location: 'East Campus',
-    distance: '0.6 mi from University',
+    location: 'Zaria Road, Jos',
+    distance: '0.6 mi from Unijos',
     price: 750,
     roomType: 'Studio',
     bedrooms: 1,
@@ -82,8 +82,8 @@ const mockProperties: Property[] = [
   {
     id: '6',
     title: 'Premium Apartment Complex',
-    location: 'University Heights',
-    distance: '0.4 mi from University',
+    location: 'Plateau, Jos',
+    distance: '0.4 mi from Unijos',
     price: 1400,
     roomType: '1 Bedroom',
     bedrooms: 1,
@@ -105,7 +105,7 @@ export default function Home() {
             <div>
               <h2 className="text-3xl font-bold mb-2">Featured Properties</h2>
               <p className="text-muted-foreground">
-                Handpicked listings near your university
+                Handpicked listings near University of Jos
               </p>
             </div>
             <Button asChild variant="outline" data-testid="button-view-all">

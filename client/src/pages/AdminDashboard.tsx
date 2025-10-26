@@ -5,13 +5,14 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Home, Eye, MessageSquare, TrendingUp, MoreVertical, Edit, Trash2 } from "lucide-react";
+import { Home, Eye, MessageSquare, TrendingUp, MoreVertical, Edit, Trash2, Users, DollarSign, Image as ImageIcon, Star } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // TODO: remove mock functionality
 import bedroom1 from "@assets/stock_images/cozy_bedroom_interio_77d4ad42.jpg";
@@ -22,7 +23,7 @@ const mockProperties = [
   {
     id: '1',
     title: 'Modern Studio Apartment',
-    address: '123 University Ave',
+    address: '123 Rayfield Road, Jos',
     type: 'Studio',
     price: 850,
     status: 'active',
@@ -33,7 +34,7 @@ const mockProperties = [
   {
     id: '2',
     title: 'Spacious 1BR with Balcony',
-    address: '456 Campus Rd',
+    address: '456 Bauchi Road, Jos',
     type: '1 Bedroom',
     price: 1200,
     status: 'active',
@@ -44,7 +45,7 @@ const mockProperties = [
   {
     id: '3',
     title: 'Cozy Shared Room',
-    address: '789 Student St',
+    address: '789 Angwan Rogo, Jos',
     type: 'Shared',
     price: 550,
     status: 'inactive',
@@ -52,6 +53,12 @@ const mockProperties = [
     inquiries: 5,
     image: bedroom2,
   },
+];
+
+const mockUsers = [
+  { id: '1', name: 'Chidinma Okafor', email: 'chidinma@unijos.edu.ng', username: 'chidinma23', role: 'user', joined: '2024-01-15' },
+  { id: '2', name: 'Ibrahim Mohammed', email: 'ibrahim@unijos.edu.ng', username: 'ibrahim_m', role: 'user', joined: '2024-02-10' },
+  { id: '3', name: 'Blessing Yakubu', email: 'blessing@unijos.edu.ng', username: 'blessing_y', role: 'user', joined: '2024-03-05' },
 ];
 
 export default function AdminDashboard() {
@@ -69,9 +76,25 @@ export default function AdminDashboard() {
           </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-            <TabsList>
+            <TabsList className="flex-wrap h-auto">
               <TabsTrigger value="overview" data-testid="tab-overview">Overview</TabsTrigger>
+              <TabsTrigger value="users" data-testid="tab-users">
+                <Users className="h-4 w-4 mr-2" />
+                Users
+              </TabsTrigger>
               <TabsTrigger value="properties" data-testid="tab-properties">My Properties</TabsTrigger>
+              <TabsTrigger value="pricing" data-testid="tab-pricing">
+                <DollarSign className="h-4 w-4 mr-2" />
+                Pricing
+              </TabsTrigger>
+              <TabsTrigger value="images" data-testid="tab-images">
+                <ImageIcon className="h-4 w-4 mr-2" />
+                Images
+              </TabsTrigger>
+              <TabsTrigger value="featured" data-testid="tab-featured">
+                <Star className="h-4 w-4 mr-2" />
+                Featured
+              </TabsTrigger>
               <TabsTrigger value="upload" data-testid="tab-upload">Upload Property</TabsTrigger>
             </TabsList>
 
@@ -148,6 +171,46 @@ export default function AdminDashboard() {
               </Card>
             </TabsContent>
 
+            <TabsContent value="users" className="space-y-6">
+              <Card className="p-6">
+                <h3 className="text-lg font-semibold mb-4">User Management</h3>
+                <div className="space-y-4">
+                  {mockUsers.map((user) => (
+                    <div key={user.id} className="flex items-center justify-between py-3 border-b last:border-0">
+                      <div className="flex items-center gap-4">
+                        <Avatar>
+                          <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <p className="font-medium">{user.name}</p>
+                          <p className="text-sm text-muted-foreground">{user.email}</p>
+                          <p className="text-xs text-muted-foreground">@{user.username}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <Badge variant={user.role === 'admin' ? 'default' : 'secondary'}>
+                          {user.role}
+                        </Badge>
+                        <span className="text-sm text-muted-foreground">Joined {user.joined}</span>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon" data-testid={`button-user-menu-${user.id}`}>
+                              <MoreVertical className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem>View Details</DropdownMenuItem>
+                            <DropdownMenuItem>Change Role</DropdownMenuItem>
+                            <DropdownMenuItem className="text-destructive">Suspend User</DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            </TabsContent>
+
             <TabsContent value="properties" className="space-y-6">
               <div className="space-y-4">
                 {mockProperties.map((property) => (
@@ -202,6 +265,109 @@ export default function AdminDashboard() {
                   </Card>
                 ))}
               </div>
+            </TabsContent>
+
+            <TabsContent value="pricing" className="space-y-6">
+              <Card className="p-6">
+                <h3 className="text-lg font-semibold mb-4">Pricing Management</h3>
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Base Price (Studio)</label>
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl font-bold">₦750 - ₦1,200</span>
+                        <Badge variant="outline">per month</Badge>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">1 Bedroom</label>
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl font-bold">₦950 - ₦1,650</span>
+                        <Badge variant="outline">per month</Badge>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Shared Room</label>
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl font-bold">₦450 - ₦650</span>
+                        <Badge variant="outline">per month</Badge>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Service Charge</label>
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl font-bold">10%</span>
+                        <Badge variant="outline">commission</Badge>
+                      </div>
+                    </div>
+                  </div>
+                  <Button data-testid="button-update-pricing">Update Pricing Structure</Button>
+                </div>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="images" className="space-y-6">
+              <Card className="p-6">
+                <h3 className="text-lg font-semibold mb-4">Image Management</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {mockProperties.map((property) => (
+                    <div key={property.id} className="relative group">
+                      <img 
+                        src={property.image} 
+                        alt={property.title}
+                        className="w-full aspect-video object-cover rounded-md"
+                      />
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-md flex items-center justify-center gap-2">
+                        <Button size="icon" variant="secondary" data-testid={`button-edit-image-${property.id}`}>
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button size="icon" variant="destructive" data-testid={`button-delete-image-${property.id}`}>
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-1">{property.title}</p>
+                    </div>
+                  ))}
+                </div>
+                <Button className="mt-4" data-testid="button-upload-images">
+                  <ImageIcon className="h-4 w-4 mr-2" />
+                  Upload More Images
+                </Button>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="featured" className="space-y-6">
+              <Card className="p-6">
+                <h3 className="text-lg font-semibold mb-4">Featured Properties Management</h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Manage which properties appear as featured on the homepage
+                </p>
+                <div className="space-y-3">
+                  {mockProperties.map((property) => (
+                    <div key={property.id} className="flex items-center justify-between p-3 border rounded-md">
+                      <div className="flex items-center gap-3">
+                        <img 
+                          src={property.image} 
+                          alt={property.title}
+                          className="w-16 h-16 object-cover rounded-md"
+                        />
+                        <div>
+                          <p className="font-medium">{property.title}</p>
+                          <p className="text-sm text-muted-foreground">{property.address}</p>
+                        </div>
+                      </div>
+                      <Button 
+                        variant={property.id === '1' || property.id === '2' ? 'default' : 'outline'}
+                        size="sm"
+                        data-testid={`button-toggle-featured-${property.id}`}
+                      >
+                        <Star className="h-4 w-4 mr-2" />
+                        {property.id === '1' || property.id === '2' ? 'Featured' : 'Set as Featured'}
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </Card>
             </TabsContent>
 
             <TabsContent value="upload">

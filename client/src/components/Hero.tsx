@@ -26,7 +26,7 @@ export default function Hero() {
             Find Your Perfect Student Home
           </h1>
           <p className="text-base md:text-xl text-white/90">
-            Safe, affordable off-campus housing near your university
+            Safe, affordable off-campus housing near University of Jos, Plateau State
           </p>
         </div>
 
@@ -35,7 +35,7 @@ export default function Hero() {
             <div className="flex-1 relative">
               <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input 
-                placeholder="Enter university or location" 
+                placeholder="Enter location in Jos, Plateau State" 
                 className="pl-10 h-12"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}

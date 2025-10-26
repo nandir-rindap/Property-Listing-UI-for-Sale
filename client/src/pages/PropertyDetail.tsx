@@ -33,9 +33,9 @@ import bathroom from "@assets/stock_images/bathroom_interior_mo_0c6a3058.jpg";
 const mockProperty = {
   id: '1',
   title: 'Modern Studio Apartment',
-  location: 'Downtown District',
-  address: '123 University Ave, Campus City, CA 12345',
-  distance: '0.3 mi from University',
+  location: 'Rayfield, Jos',
+  address: 'Plot 123 Rayfield Road, Jos, Plateau State, Nigeria',
+  distance: '0.3 mi from Unijos',
   price: 850,
   deposit: 850,
   roomType: 'Studio',

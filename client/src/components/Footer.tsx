@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import logoImage from "@assets/image_1761465409195.png";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -18,13 +19,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
-                <Home className="h-4 w-4 text-primary-foreground" />
-              </div>
+              <img 
+                src={logoImage} 
+                alt="InTincity Homes" 
+                className="h-8 w-8 object-contain"
+              />
               <span className="text-lg font-bold">InTincity Homes</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Connecting students with safe, affordable off-campus housing near universities.
+              Connecting students with safe, affordable off-campus housing in Jos, Plateau State, Nigeria.
             </p>
           </div>
 
