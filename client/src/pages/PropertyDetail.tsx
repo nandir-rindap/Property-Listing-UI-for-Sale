@@ -213,11 +213,8 @@ export default function PropertyDetail() {
               <Card className="p-6 sticky top-24">
                 <div className="mb-6">
                   <div className="text-3xl font-bold mb-1">
-                    ₦{mockProperty.price.toLocaleString()}
-                    <span className="text-lg text-muted-foreground font-normal">/month</span>
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    ₦{mockProperty.deposit.toLocaleString()} security deposit
+                    ₦{(mockProperty.price * 12).toLocaleString()}
+                    <span className="text-lg text-muted-foreground font-normal">/year</span>
                   </div>
                 </div>
 

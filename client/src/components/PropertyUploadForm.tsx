@@ -46,7 +46,6 @@ export default function PropertyUploadForm() {
     bedrooms: "",
     bathrooms: "",
     price: "",
-    deposit: "",
     description: "",
     amenities: [] as string[],
   });
@@ -68,7 +67,6 @@ export default function PropertyUploadForm() {
       bedrooms: "",
       bathrooms: "",
       price: "",
-      deposit: "",
       description: "",
       amenities: [],
     });
@@ -314,29 +312,16 @@ export default function PropertyUploadForm() {
 
         {step === 3 && (
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="price">Monthly Rent (₦)</Label>
-                <Input
-                  id="price"
-                  type="number"
-                  placeholder="850000"
-                  value={formData.price}
-                  onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                  data-testid="input-price"
-                />
-              </div>
-              <div>
-                <Label htmlFor="deposit">Security Deposit (₦)</Label>
-                <Input
-                  id="deposit"
-                  type="number"
-                  placeholder="850000"
-                  value={formData.deposit}
-                  onChange={(e) => setFormData({ ...formData, deposit: e.target.value })}
-                  data-testid="input-deposit"
-                />
-              </div>
+            <div>
+              <Label htmlFor="price">Rent (₦)</Label>
+              <Input
+                id="price"
+                type="number"
+                placeholder="850000"
+                value={formData.price}
+                onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                data-testid="input-price"
+              />
             </div>
 
             <div className="bg-muted/50 p-4 rounded-lg mt-6">
@@ -355,7 +340,7 @@ export default function PropertyUploadForm() {
                   <span className="font-medium">{formData.roomType || "Not set"}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Monthly Rent:</span>
+                  <span className="text-muted-foreground">Rent:</span>
                   <span className="font-medium">₦{formData.price ? Number(formData.price).toLocaleString() : "0"}</span>
                 </div>
               </div>
