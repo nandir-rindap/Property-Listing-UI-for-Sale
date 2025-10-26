@@ -210,22 +210,22 @@ export default function PropertyUploadForm() {
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="price">Monthly Rent ($)</Label>
+                <Label htmlFor="price">Monthly Rent (₦)</Label>
                 <Input
                   id="price"
                   type="number"
-                  placeholder="850"
+                  placeholder="850000"
                   value={formData.price}
                   onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                   data-testid="input-price"
                 />
               </div>
               <div>
-                <Label htmlFor="deposit">Security Deposit ($)</Label>
+                <Label htmlFor="deposit">Security Deposit (₦)</Label>
                 <Input
                   id="deposit"
                   type="number"
-                  placeholder="850"
+                  placeholder="850000"
                   value={formData.deposit}
                   onChange={(e) => setFormData({ ...formData, deposit: e.target.value })}
                   data-testid="input-deposit"
@@ -250,7 +250,7 @@ export default function PropertyUploadForm() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Monthly Rent:</span>
-                  <span className="font-medium">${formData.price || "0"}</span>
+                  <span className="font-medium">₦{formData.price ? Number(formData.price).toLocaleString() : "0"}</span>
                 </div>
               </div>
             </div>

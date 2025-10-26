@@ -11,10 +11,9 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Calendar } from "@/components/ui/calendar";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Upload } from "lucide-react";
+import { AlertCircle } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface BookingModalProps {
   open: boolean;
@@ -25,27 +24,15 @@ interface BookingModalProps {
 
 export default function BookingModal({ open, onOpenChange, propertyTitle, monthlyPrice }: BookingModalProps) {
   const { toast } = useToast();
-  const [moveInDate, setMoveInDate] = useState<Date>();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
-  const [idType, setIdType] = useState("");
-  const [idFile, setIdFile] = useState<File | null>(null);
   
   const yearlyTotal = monthlyPrice * 12;
 
   const handleSubmit = (paymentType: 'now' | 'later') => {
-    if (!idFile || !idType) {
-      toast({
-        title: "Missing Information",
-        description: "Please upload your identification document to proceed.",
-        variant: "destructive",
-      });
-      return;
-    }
-    
-    console.log('Booking request:', { name, email, phone, message, moveInDate, idType, idFile, paymentType });
+    console.log('Booking request:', { name, email, phone, message, paymentType });
     toast({
       title: paymentType === 'now' ? "Processing Payment..." : "Booking Request Sent!",
       description: paymentType === 'now' 
@@ -57,9 +44,6 @@ export default function BookingModal({ open, onOpenChange, propertyTitle, monthl
     setEmail("");
     setPhone("");
     setMessage("");
-    setMoveInDate(undefined);
-    setIdType("");
-    setIdFile(null);
   };
 
   return (
@@ -109,18 +93,12 @@ export default function BookingModal({ open, onOpenChange, propertyTitle, monthl
             </div>
           </div>
 
-          <div>
-            <Label>Preferred Move-in Date</Label>
-            <div className="mt-2 border rounded-lg p-3">
-              <Calendar
-                mode="single"
-                selected={moveInDate}
-                onSelect={setMoveInDate}
-                className="rounded-md"
-                disabled={(date) => date < new Date()}
-              />
-            </div>
-          </div>
+          <Alert className="border-blue-200 bg-blue-50 dark:bg-blue-950 dark:border-blue-800">
+            <AlertCircle className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+            <AlertDescription className="text-blue-800 dark:text-blue-200">
+              All bookings are for a <strong>1-year lease period</strong>. Your move-in date will be scheduled after payment completion.
+            </AlertDescription>
+          </Alert>
 
           <div>
             <Label htmlFor="message">Message to Owner</Label>
@@ -134,46 +112,27 @@ export default function BookingModal({ open, onOpenChange, propertyTitle, monthl
             />
           </div>
 
-          <div className="space-y-3 p-4 border rounded-lg bg-muted/50">
-            <div className="flex items-center gap-2">
-              <Upload className="h-5 w-5 text-primary" />
-              <Label className="text-base font-semibold">Identification Verification Required</Label>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Please upload a photo of one of the following identification documents to proceed with booking:
-            </p>
-            <div>
-              <Label htmlFor="id-type">ID Type</Label>
-              <Select value={idType} onValueChange={setIdType}>
-                <SelectTrigger id="id-type" data-testid="select-id-type">
-                  <SelectValue placeholder="Select ID type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="nin">NIN Slip</SelectItem>
-                  <SelectItem value="voters_card">Voter's Card</SelectItem>
-                  <SelectItem value="drivers_license">Driver's License</SelectItem>
-                  <SelectItem value="passport">International Passport</SelectItem>
-                  <SelectItem value="student_id">Student ID Card</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label htmlFor="id-upload">Upload ID Document</Label>
-              <Input
-                id="id-upload"
-                type="file"
-                accept="image/*,.pdf"
-                onChange={(e) => setIdFile(e.target.files?.[0] || null)}
-                data-testid="input-id-upload"
-                className="cursor-pointer"
-              />
-              {idFile && (
-                <p className="text-sm text-green-600 mt-1">
-                  ✓ {idFile.name} uploaded
+          <Alert className="border-amber-200 bg-amber-50 dark:bg-amber-950 dark:border-amber-800">
+            <AlertCircle className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+            <AlertDescription className="text-amber-900 dark:text-amber-200">
+              <div className="space-y-2">
+                <p className="font-semibold">Identification Verification Required</p>
+                <p className="text-sm">
+                  Before you can complete your booking, you must upload a photo of one of the following valid identification documents:
                 </p>
-              )}
-            </div>
-          </div>
+                <ul className="text-sm list-disc list-inside space-y-1 ml-2">
+                  <li>NIN Slip (National Identification Number)</li>
+                  <li>Voter's Card</li>
+                  <li>Driver's License</li>
+                  <li>International Passport</li>
+                  <li>Student ID Card</li>
+                </ul>
+                <p className="text-sm font-medium mt-2">
+                  ID verification will be completed through your user profile before booking confirmation.
+                </p>
+              </div>
+            </AlertDescription>
+          </Alert>
 
           <div className="p-4 border rounded-lg bg-primary/5">
             <p className="text-sm font-medium mb-2">Booking Summary</p>

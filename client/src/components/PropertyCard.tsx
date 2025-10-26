@@ -97,7 +97,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
         <div className="flex items-center justify-between">
           <div>
             <span className="text-2xl font-bold" data-testid={`text-price-${property.id}`}>
-              ${property.price}
+              ₦{property.price.toLocaleString()}
             </span>
             <span className="text-sm text-muted-foreground">/month</span>
           </div>

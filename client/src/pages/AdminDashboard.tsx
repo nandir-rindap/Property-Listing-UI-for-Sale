@@ -132,7 +132,7 @@ export default function AdminDashboard() {
                     <span className="text-sm text-muted-foreground">Revenue</span>
                     <TrendingUp className="h-4 w-4 text-muted-foreground" />
                   </div>
-                  <div className="text-3xl font-bold">$2,600</div>
+                  <div className="text-3xl font-bold">₦2,600,000</div>
                   <p className="text-xs text-muted-foreground mt-1">Per month</p>
                 </Card>
               </div>
@@ -233,7 +233,7 @@ export default function AdminDashboard() {
                           <span className="text-muted-foreground">
                             {property.type}
                           </span>
-                          <span className="font-semibold">${property.price}/mo</span>
+                          <span className="font-semibold">₦{property.price.toLocaleString()}/mo</span>
                           <span className="text-muted-foreground flex items-center gap-1">
                             <Eye className="h-4 w-4" />
                             {property.views}

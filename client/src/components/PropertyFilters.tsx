@@ -71,8 +71,8 @@ export default function PropertyFilters({ onFiltersChange }: PropertyFiltersProp
             data-testid="slider-price"
           />
           <div className="flex justify-between text-sm text-muted-foreground">
-            <span>${priceRange[0]}</span>
-            <span>${priceRange[1]}</span>
+            <span>₦{priceRange[0].toLocaleString()}</span>
+            <span>₦{priceRange[1].toLocaleString()}</span>
           </div>
         </div>
       </div>
