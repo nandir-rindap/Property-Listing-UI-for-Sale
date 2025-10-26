@@ -14,7 +14,7 @@ export default function Header() {
             <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary">
               <Home className="h-5 w-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-bold">StudentStay</span>
+            <span className="text-xl font-bold">InTincity Homes</span>
           </Link>
 
           <nav className="hidden items-center gap-6 md:flex">
@@ -42,12 +42,6 @@ export default function Header() {
             </Button>
             <Button variant="ghost" size="icon" className="hidden md:flex" data-testid="button-account">
               <User className="h-5 w-5" />
-            </Button>
-            <Button asChild className="hidden md:flex" data-testid="button-post-property">
-              <Link href="/admin">
-                <Plus className="h-4 w-4 mr-2" />
-                Post Property
-              </Link>
             </Button>
           </div>
         </div>

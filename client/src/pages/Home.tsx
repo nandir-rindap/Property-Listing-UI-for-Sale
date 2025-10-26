@@ -99,9 +99,9 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <Hero />
 
-      <section className="py-16 px-4">
+      <section className="py-8 md:py-16 px-4">
         <div className="mx-auto max-w-7xl">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 md:mb-8 gap-4">
             <div>
               <h2 className="text-3xl font-bold mb-2">Featured Properties</h2>
               <p className="text-muted-foreground">
@@ -124,10 +124,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 px-4 bg-muted/30">
+      <section className="py-8 md:py-16 px-4 bg-muted/30">
         <div className="mx-auto max-w-7xl">
-          <h2 className="text-3xl font-bold text-center mb-12">Why Choose StudentStay?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">Why Choose InTincity Homes?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             <div className="text-center">
               <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4">
                 <Shield className="h-8 w-8 text-primary" />
@@ -159,13 +159,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 px-4">
+      <section className="py-12 md:py-20 px-4">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4">
             Ready to Find Your Perfect Home?
           </h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Join thousands of students who found their ideal accommodation through StudentStay
+          <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8">
+            Join thousands of students who found their ideal accommodation through InTincity Homes
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild data-testid="button-browse-properties">

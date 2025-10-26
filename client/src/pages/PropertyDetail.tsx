@@ -80,21 +80,22 @@ export default function PropertyDetail() {
   return (
     <div className="min-h-screen flex flex-col">
       <div className="flex-1">
-        <div className="mx-auto max-w-7xl px-4 py-8">
-          <div className="mb-6">
+        <div className="mx-auto max-w-7xl px-4 py-4 md:py-8">
+          <div className="mb-4 md:mb-6">
             <Link href="/properties" className="text-sm text-muted-foreground hover:text-foreground">
               ← Back to listings
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
             <div className="lg:col-span-2">
-              <div className="mb-6">
-                <div className="relative aspect-video rounded-lg overflow-hidden mb-4 group">
+              <div className="mb-4 md:mb-6">
+                <div className="relative aspect-video rounded-lg overflow-hidden mb-3 md:mb-4 group bg-muted">
                   <img
                     src={mockProperty.images[currentImageIndex]}
                     alt={mockProperty.title}
                     className="w-full h-full object-cover"
+                    loading="eager"
                   />
                   <Button
                     variant="ghost"
@@ -119,12 +120,12 @@ export default function PropertyDetail() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-6 gap-2">
+                <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
                   {mockProperty.images.map((image, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentImageIndex(index)}
-                      className={`aspect-video rounded-md overflow-hidden border-2 transition-all hover-elevate ${
+                      className={`aspect-video rounded-md overflow-hidden border-2 transition-all hover-elevate bg-muted ${
                         index === currentImageIndex
                           ? "border-primary"
                           : "border-transparent"
@@ -135,6 +136,7 @@ export default function PropertyDetail() {
                         src={image}
                         alt={`View ${index + 1}`}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     </button>
                   ))}

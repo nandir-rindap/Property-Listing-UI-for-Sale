@@ -14,14 +14,14 @@ export default function Footer() {
 
   return (
     <footer className="border-t bg-muted/30 mt-auto">
-      <div className="mx-auto max-w-7xl px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      <div className="mx-auto max-w-7xl px-4 py-8 md:py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
                 <Home className="h-4 w-4 text-primary-foreground" />
               </div>
-              <span className="text-lg font-bold">StudentStay</span>
+              <span className="text-lg font-bold">InTincity Homes</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Connecting students with safe, affordable off-campus housing near universities.
@@ -85,7 +85,7 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2025 StudentStay. All rights reserved.
+            © 2025 InTincity Homes. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <Button variant="ghost" size="icon" data-testid="button-facebook">
