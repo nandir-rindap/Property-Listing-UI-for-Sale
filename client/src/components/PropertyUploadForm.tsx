@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
-import { Upload, X } from "lucide-react";
+import { Upload, X, Plus, Wifi, Car, Wind, Droplets, Home, Zap, Shield, Dog, Utensils, Waves, Tv, Dumbbell, Package } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -14,6 +14,27 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+
+const availableIcons = [
+  { name: 'Wifi', icon: Wifi },
+  { name: 'Car', icon: Car },
+  { name: 'Wind', icon: Wind },
+  { name: 'Droplets', icon: Droplets },
+  { name: 'Home', icon: Home },
+  { name: 'Zap', icon: Zap },
+  { name: 'Shield', icon: Shield },
+  { name: 'Dog', icon: Dog },
+  { name: 'Utensils', icon: Utensils },
+  { name: 'Waves', icon: Waves },
+  { name: 'Tv', icon: Tv },
+  { name: 'Dumbbell', icon: Dumbbell },
+  { name: 'Package', icon: Package },
+];
+
+interface CustomAmenity {
+  name: string;
+  icon: string;
+}
 
 export default function PropertyUploadForm() {
   const { toast } = useToast();
@@ -29,9 +50,12 @@ export default function PropertyUploadForm() {
     description: "",
     amenities: [] as string[],
   });
+  const [customAmenities, setCustomAmenities] = useState<CustomAmenity[]>([]);
+  const [newAmenityName, setNewAmenityName] = useState("");
+  const [newAmenityIcon, setNewAmenityIcon] = useState("Wifi");
 
   const handleSubmit = () => {
-    console.log('Property submitted:', formData);
+    console.log('Property submitted:', formData, 'Custom amenities:', customAmenities);
     toast({
       title: "Property Listed!",
       description: "Your property has been successfully added.",
@@ -48,6 +72,19 @@ export default function PropertyUploadForm() {
       description: "",
       amenities: [],
     });
+    setCustomAmenities([]);
+  };
+
+  const handleAddAmenity = () => {
+    if (newAmenityName.trim()) {
+      setCustomAmenities([...customAmenities, { name: newAmenityName, icon: newAmenityIcon }]);
+      setNewAmenityName("");
+      setNewAmenityIcon("Wifi");
+    }
+  };
+
+  const handleRemoveAmenity = (index: number) => {
+    setCustomAmenities(customAmenities.filter((_, i) => i !== index));
   };
 
   const handleAmenityToggle = (amenity: string, checked: boolean) => {
@@ -183,7 +220,7 @@ export default function PropertyUploadForm() {
             </div>
 
             <div>
-              <Label className="mb-3 block">Amenities</Label>
+              <Label className="mb-3 block">Standard Amenities</Label>
               <div className="grid grid-cols-2 gap-3">
                 {['WiFi', 'Parking', 'Laundry', 'Furnished', 'Pet-friendly', 'Utilities Included', 'Air Conditioning', 'Heating'].map((amenity) => (
                   <div key={amenity} className="flex items-center space-x-2">
@@ -202,6 +239,75 @@ export default function PropertyUploadForm() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div className="space-y-3 border-t pt-6">
+              <Label className="mb-3 block">Custom Amenities</Label>
+              <div className="flex gap-2">
+                <div className="flex-1">
+                  <Input
+                    placeholder="Amenity name (e.g., Pool, Gym)"
+                    value={newAmenityName}
+                    onChange={(e) => setNewAmenityName(e.target.value)}
+                    data-testid="input-custom-amenity-name"
+                  />
+                </div>
+                <div className="w-32">
+                  <Select value={newAmenityIcon} onValueChange={setNewAmenityIcon}>
+                    <SelectTrigger data-testid="select-amenity-icon">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {availableIcons.map((icon) => (
+                        <SelectItem key={icon.name} value={icon.name}>
+                          <div className="flex items-center gap-2">
+                            <icon.icon className="h-4 w-4" />
+                            <span>{icon.name}</span>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="icon"
+                  onClick={handleAddAmenity}
+                  data-testid="button-add-amenity"
+                >
+                  <Plus className="h-4 w-4" />
+                </Button>
+              </div>
+              {customAmenities.length > 0 && (
+                <div className="space-y-2 mt-3">
+                  {customAmenities.map((amenity, index) => {
+                    const IconComponent = availableIcons.find(i => i.name === amenity.icon)?.icon || Wifi;
+                    return (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between p-2 border rounded-md bg-muted/30"
+                      >
+                        <div className="flex items-center gap-2">
+                          <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                            <IconComponent className="h-4 w-4 text-primary" />
+                          </div>
+                          <span className="text-sm font-medium">{amenity.name}</span>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleRemoveAmenity(index)}
+                          data-testid={`button-remove-amenity-${index}`}
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         )}

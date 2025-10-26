@@ -15,7 +15,6 @@ import {
   Wind,
   Droplets,
   Home,
-  MessageCircle,
   Calendar,
   ChevronLeft,
   ChevronRight,
@@ -228,50 +227,14 @@ export default function PropertyDetail() {
                   </Badge>
                 )}
 
-                <div className="space-y-3">
-                  <Button
-                    className="w-full"
-                    size="lg"
-                    onClick={() => setBookingOpen(true)}
-                    data-testid="button-request-booking"
-                  >
-                    Request to Book
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full"
-                    size="lg"
-                    data-testid="button-contact-owner"
-                  >
-                    <MessageCircle className="h-4 w-4 mr-2" />
-                    Contact Owner
-                  </Button>
-                </div>
-
-                <div className="mt-6 pt-6 border-t">
-                  <h3 className="font-semibold mb-3">Property Owner</h3>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-                      <span className="text-lg font-semibold text-primary">
-                        {mockProperty.owner.name.charAt(0)}
-                      </span>
-                    </div>
-                    <div>
-                      <div className="font-medium">{mockProperty.owner.name}</div>
-                      <div className="text-sm text-muted-foreground">Property Owner</div>
-                    </div>
-                  </div>
-                  <div className="space-y-1 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Response time:</span>
-                      <span className="font-medium">{mockProperty.owner.responseTime}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Response rate:</span>
-                      <span className="font-medium">{mockProperty.owner.responseRate}</span>
-                    </div>
-                  </div>
-                </div>
+                <Button
+                  className="w-full"
+                  size="lg"
+                  onClick={() => setBookingOpen(true)}
+                  data-testid="button-request-booking"
+                >
+                  Request to Book
+                </Button>
               </Card>
             </div>
           </div>
