@@ -50,16 +50,6 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Link href="/admin?tab=upload" className="hidden sm:block">
-              <Button 
-                variant="default" 
-                size="sm"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg"
-              >
-                List Your Property
-              </Button>
-            </Link>
-            
             <ThemeToggle />
             
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
@@ -101,18 +91,6 @@ export default function Header() {
                     </span>
                   </Link>
                   <div className="border-t pt-4 mt-4">
-                    <Link 
-                      href="/admin?tab=upload" 
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block mb-3"
-                    >
-                      <Button 
-                        variant="default" 
-                        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg"
-                      >
-                        List Your Property
-                      </Button>
-                    </Link>
                     <Button variant="ghost" className="w-full justify-start" data-testid="button-account-mobile">
                       <User className="h-5 w-5 mr-2" />
                       Account

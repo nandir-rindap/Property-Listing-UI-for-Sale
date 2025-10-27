@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 import PropertyUploadForm from "@/components/PropertyUploadForm";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
@@ -64,15 +63,7 @@ const mockUsers = [
 ];
 
 export default function AdminDashboard() {
-  const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState("overview");
-
-  useEffect(() => {
-    const tab = searchParams.get("tab");
-    if (tab) {
-      setActiveTab(tab);
-    }
-  }, [searchParams]);
 
   return (
     <div className="min-h-screen flex flex-col">
