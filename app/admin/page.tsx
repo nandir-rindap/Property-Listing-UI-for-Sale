@@ -19,9 +19,6 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
 // TODO: remove mock functionality
-import bedroom1 from "@assets/stock_images/cozy_bedroom_interio_77d4ad42.jpg";
-import kitchen1 from "@assets/stock_images/modern_kitchen_apart_a7bb1661.jpg";
-import bedroom2 from "@assets/stock_images/cozy_bedroom_interio_c99d0ed3.jpg";
 
 const mockProperties = [
   {
@@ -33,7 +30,7 @@ const mockProperties = [
     status: 'active',
     views: 234,
     inquiries: 12,
-    image: bedroom1,
+    image: '/images/cozy_bedroom_interio_77d4ad42.jpg',
   },
   {
     id: '2',
@@ -44,7 +41,7 @@ const mockProperties = [
     status: 'active',
     views: 189,
     inquiries: 8,
-    image: kitchen1,
+    image: '/images/modern_kitchen_apart_a7bb1661.jpg',
   },
   {
     id: '3',
@@ -55,7 +52,7 @@ const mockProperties = [
     status: 'inactive',
     views: 145,
     inquiries: 5,
-    image: bedroom2,
+    image: '/images/cozy_bedroom_interio_c99d0ed3.jpg',
   },
 ];
 

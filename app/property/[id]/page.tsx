@@ -22,12 +22,6 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import bedroom1 from "@assets/stock_images/cozy_bedroom_interio_77d4ad42.jpg";
-import bedroom2 from "@assets/stock_images/cozy_bedroom_interio_c99d0ed3.jpg";
-import bedroom3 from "@assets/stock_images/cozy_bedroom_interio_f806479a.jpg";
-import kitchen1 from "@assets/stock_images/modern_kitchen_apart_a7bb1661.jpg";
-import kitchen2 from "@assets/stock_images/modern_kitchen_apart_7439e746.jpg";
-import bathroom from "@assets/stock_images/bathroom_interior_mo_0c6a3058.jpg";
 
 const mockProperty = {
   id: '1',
@@ -41,7 +35,7 @@ const mockProperty = {
   bedrooms: 1,
   bathrooms: 1,
   sqft: 450,
-  images: [bedroom1, kitchen1, bedroom2, kitchen2, bedroom3, bathroom],
+  images: ['/images/cozy_bedroom_interio_77d4ad42.jpg', '/images/modern_kitchen_apart_a7bb1661.jpg', '/images/cozy_bedroom_interio_c99d0ed3.jpg', '/images/modern_kitchen_apart_7439e746.jpg', '/images/cozy_bedroom_interio_f806479a.jpg', '/images/bathroom_interior_mo_0c6a3058.jpg'],
   amenities: [
     { name: 'WiFi', icon: Wifi },
     { name: 'Parking', icon: Car },

@@ -3,7 +3,6 @@
 import { Search, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import heroImage from "@assets/stock_images/modern_student_apart_14fceb4a.jpg";
 import { useState } from "react";
 
 export default function Hero() {
@@ -18,7 +17,7 @@ export default function Hero() {
     <div className="relative h-[450px] md:h-[600px] overflow-hidden">
       <div 
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        style={{ backgroundImage: 'url(/images/modern_student_apart_14fceb4a.jpg)' }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
       

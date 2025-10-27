@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import logoImage from "@assets/image_1761465409195.png";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -22,7 +21,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <img 
-                src={logoImage} 
+                src="/images/logo.png" 
                 alt="InTincity Homes" 
                 className="h-8 w-8 object-contain"
               />

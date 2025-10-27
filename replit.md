@@ -131,9 +131,10 @@ Preferred communication style: Simple, everyday language.
 
 ### Asset Management
 
-- Stock images stored in `attached_assets/stock_images/` directory
-- Logo and branding assets in `attached_assets/`
-- Vite alias configured for `@assets` path resolution
+- All static assets moved to Next.js `public/images/` directory
+- Images accessible via `/images/` path (e.g., `/images/logo.png`)
+- Stock property images for mock data
+- Logo and branding assets
 
 ### Session & Storage
 

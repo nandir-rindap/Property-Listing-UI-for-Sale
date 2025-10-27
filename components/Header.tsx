@@ -13,7 +13,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import logoImage from "@assets/image_1761465409195.png";
 
 export default function Header() {
   const pathname = usePathname();
@@ -25,7 +24,7 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2">
             <img 
-              src={logoImage} 
+              src="/images/logo.png" 
               alt="InTincity Homes" 
               className="h-10 w-10 object-contain"
             />

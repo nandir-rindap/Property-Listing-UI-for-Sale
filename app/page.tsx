@@ -7,12 +7,6 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight, Shield, MapPin, DollarSign } from "lucide-react";
 
-import bedroom1 from "@assets/stock_images/cozy_bedroom_interio_77d4ad42.jpg";
-import bedroom2 from "@assets/stock_images/cozy_bedroom_interio_c99d0ed3.jpg";
-import bedroom3 from "@assets/stock_images/cozy_bedroom_interio_f806479a.jpg";
-import kitchen1 from "@assets/stock_images/modern_kitchen_apart_a7bb1661.jpg";
-import kitchen2 from "@assets/stock_images/modern_kitchen_apart_7439e746.jpg";
-import apartment1 from "@assets/stock_images/apartment_building_e_1eafe140.jpg";
 
 const mockProperties: Property[] = [
   {
@@ -24,7 +18,7 @@ const mockProperties: Property[] = [
     roomType: 'Studio',
     bedrooms: 1,
     bathrooms: 1,
-    image: bedroom1,
+    image: '/images/cozy_bedroom_interio_77d4ad42.jpg',
     amenities: ['WiFi', 'Parking', 'Furnished'],
     available: true,
   },
@@ -37,7 +31,7 @@ const mockProperties: Property[] = [
     roomType: '1 Bedroom',
     bedrooms: 1,
     bathrooms: 1,
-    image: kitchen1,
+    image: '/images/modern_kitchen_apart_a7bb1661.jpg',
     amenities: ['WiFi', 'Parking'],
     available: true,
   },
@@ -50,7 +44,7 @@ const mockProperties: Property[] = [
     roomType: 'Shared',
     bedrooms: 1,
     bathrooms: 1,
-    image: bedroom2,
+    image: '/images/cozy_bedroom_interio_c99d0ed3.jpg',
     amenities: ['WiFi', 'Furnished'],
     available: false,
   },
@@ -63,7 +57,7 @@ const mockProperties: Property[] = [
     roomType: '2 Bedroom',
     bedrooms: 2,
     bathrooms: 2,
-    image: kitchen2,
+    image: '/images/modern_kitchen_apart_7439e746.jpg',
     amenities: ['WiFi', 'Parking', 'Furnished'],
     available: true,
   },
@@ -76,7 +70,7 @@ const mockProperties: Property[] = [
     roomType: 'Studio',
     bedrooms: 1,
     bathrooms: 1,
-    image: bedroom3,
+    image: '/images/cozy_bedroom_interio_f806479a.jpg',
     amenities: ['WiFi'],
     available: true,
   },
@@ -89,7 +83,7 @@ const mockProperties: Property[] = [
     roomType: '1 Bedroom',
     bedrooms: 1,
     bathrooms: 1,
-    image: apartment1,
+    image: '/images/apartment_building_e_1eafe140.jpg',
     amenities: ['WiFi', 'Parking', 'Furnished'],
     available: true,
   },
