@@ -40,7 +40,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
         <Button
           size="icon"
           variant="ghost"
-          className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm hover:bg-white"
+          className="absolute top-3 right-3 bg-white hover:bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200"
           onClick={(e) => {
             e.preventDefault();
             setIsFavorite(!isFavorite);
@@ -48,7 +48,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           }}
           data-testid={`button-favorite-${property.id}`}
         >
-          <Heart className={`h-5 w-5 ${isFavorite ? 'fill-red-500 text-red-500' : ''}`} />
+          <Heart className={`h-6 w-6 transition-colors ${isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-600 hover:text-red-500'}`} />
         </Button>
         {property.available && (
           <Badge className="absolute top-2 left-2 bg-green-600 text-white">
